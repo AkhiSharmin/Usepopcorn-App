@@ -57,7 +57,7 @@ export default function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar movies={movies} />
       <Main movies={movies} />
     </>
   );
@@ -65,12 +65,12 @@ export default function App() {
 
 
 
-function NavBar() {
+function NavBar({ movies }) {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <NumResults />
+      <NumResults movies={movies} />
     </nav>
   );
 }
@@ -99,9 +99,9 @@ function Search() {
   />
 }
 
-function NumResults() {
+function NumResults({ movies }) {
   return <p className="num-results">
-    Found <strong>X</strong> results
+    Found <strong>{movies.length}</strong> results
   </p>
 }
 
@@ -110,25 +110,25 @@ function Main({ movies }) {
 
   return (
     <main className="main">
-      <ListBox movies={movies} />
+      <List movies={movies} />
       <WatchedBox />
     </main>
   );
 }
 
 
-function ListBox({ movies }) {
-  const [isOpen1, setIsOpen1] = useState(true);
+function List({ movies }) {
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="box">
       <button
         className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
+        onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen1 ? "–" : "+"}
+        {isOpen ? "–" : "+"}
       </button>
-      {isOpen1 && (
+      {isOpen && (
         <MovieList movies={movies} />
       )}
     </div>
