@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+
+
 // import "./index.css";
 // import App from "./App";
 
@@ -7,9 +9,13 @@ import ReactDOM from "react-dom/client";
 import StarRating from "./StartRating";
 
 function Test() {
+
+  const [movieRating, setMovieRating] = useState(0)
+
   return <div>
-    <StarRating color="blue" maxRating={10} />
-    <p>This movies was rated X start</p>
+    <StarRating color="blue" maxRating={10}
+      onSetRating={setMovieRating} />
+    <p>This movies was rated {movieRating} start</p>
   </div>
 }
 
